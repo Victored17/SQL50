@@ -1,0 +1,53 @@
+# Write a solution to find the ids of products that are both low fat and recyclable.
+select product_id 
+from products
+where low_fats='Y' and recyclable='Y';
+--------------------------------------------------
+# Find the names of the customer that are not referred by the customer with id = 2.
+select name
+from customer
+where referee_id !=2 or referee_id is null;
+----------------------------------------------------
+#Write a solution to find the name, population, and area of the big countries.
+select name, population, area
+from world
+where area>=3000000 or population >=25000000
+------------------------------------------------
+#Write a solution to find all the authors that viewed at least one of their own articles.
+select distinct author_id as id
+from views
+where author_id=viewer_id
+order by author_id asc
+-----------------------------------------------------
+# Write your MySQL query statement below3Write a solution to find the IDs of the invalid tweets. The tweet is invalid if the number of characters used in the content of the tweet is strictly greater than 15.
+select tweet_id
+from tweets
+where length(content) > 15
+----------------------------------------------------------
+#Write a solution to show the unique ID of each user, If a user does not have a unique ID replace just show null.
+Select empu.unique_id, emp.name
+from employees as emp
+left join employeeuni as empu
+on empu.id=emp.id
+----------------------------
+# Write a solution to report the product_name, year, and price for each sale_id in the Sales table.
+select p.product_name, s.year, s.price
+ from sales as s
+ join product as p
+ on p.product_id=s.product_id
+----------------------------------------
+# Write a solution to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+select v.customer_id, count(v.visit_id) as count_no_trans
+from visits as v
+left join transactions as t
+on t.visit_id=v.visit_id
+where t.transaction_id IS NULL 
+group by v.customer_id
+order by count(v.visit_id) desc
+-------------------------------------------------
+#Write a solution to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
+select w2.id 
+from weather as w1
+join weather as w2
+on DATEDIFF(w1.recordDate,w2.recordDate)=-1 and w2.temperature>w1.temperature
+-------------------------------------
